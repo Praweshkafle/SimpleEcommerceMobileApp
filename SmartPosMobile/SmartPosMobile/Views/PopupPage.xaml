@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns:animations="http://rotorgames.com"
+                 x:Class="SmartPosMobile.Views.PopupPage">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <StackLayout 
+        VerticalOptions="EndAndExpand" 
+        HorizontalOptions="FillAndExpand" 
+       >
+        <Frame CornerRadius="10"  HorizontalOptions="FillAndExpand" 
+               HeightRequest="200">
+            <StackLayout>
+                <Label Text="Order Summary" HorizontalOptions="Center"
+                       FontSize="Title" TextColor="Black"/>
+                <StackLayout Orientation="Horizontal" >
+                    <StackLayout HorizontalOptions="StartAndExpand" Margin="10,0,0,0">
+                        <Label Text="Burger" FontSize="Large" TextColor="Black"/>
+                        <Label Text="Noodles" FontSize="Large" TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="EndAndExpand" Margin="0,0,0,10">
+                        <Label Text="200$" FontSize="Large"/>
+                        <Label Text="200$" FontSize="Large" />
+                    </StackLayout>
+                   
+                </StackLayout>
+                <StackLayout HorizontalOptions="EndAndExpand" TranslationY="-10">
+                    <Label Text="Total Amount: 400$" FontSize="Large"/>
+                </StackLayout>
+                <Button  Text="CheckOut" FontAttributes="Bold" FontSize="Large" BackgroundColor="Gold" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

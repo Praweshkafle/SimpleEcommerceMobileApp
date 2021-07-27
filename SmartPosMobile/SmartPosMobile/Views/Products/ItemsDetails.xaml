@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:SmartPosMobile.ViewModels"
+             x:Class="SmartPosMobile.Views.ItemsDetails"
+             Title="Items Details">
+    <Grid BackgroundColor="#f2f2f2">
+        <ScrollView>
+            <RefreshView IsRefreshing="{Binding IsBusy}"> 
+                <Grid  Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackLayout Margin="10">
+                            <Frame Margin="0" 
+                               HorizontalOptions="CenterAndExpand"
+                               WidthRequest="300"
+                               HasShadow="False">
+                                <Image x:Name="Image" Source="{Binding image}"/>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackLayout >
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="Save 20%" BackgroundColor="Crimson"
+                                   TextColor="White"
+                                   Padding="5"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal"
+                                         HeightRequest="40">
+                                    <Button x:Name="Increase" FontSize="20"
+                                        Clicked="Increase_Clicked"
+                                        Text="+" WidthRequest="40"/>
+                                    <Label x:Name="IncDecData" Text="2"
+                                       FontSize="25"
+                                       BackgroundColor="White"
+                                       Margin="4"
+                                       Padding="2"/>
+                                    <Button x:Name="Decrease" Text="-"
+                                        FontSize="20"
+                                        Clicked="Decrease_Clicked"
+                                        WidthRequest="40"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+
+                                <StackLayout>
+                                    <Label x:Name="itemName" Text="{Binding title}" 
+                                   HorizontalOptions="StartAndExpand"
+                                   FontSize="25"
+                                   TextColor="Green"/>
+                                    <Label x:Name="Category" Text="{Binding category}" 
+                                   HorizontalOptions="StartAndExpand"
+                                   FontSize="15"
+                                   TextColor="Gray"
+                                   TranslationY="-8"/>
+                                </StackLayout>
+                                <Label x:Name="Price" Text="{Binding price}" 
+                                   HorizontalOptions="EndAndExpand"
+                                   FontSize="30"
+                                   TextColor="Gray"/>
+                            </StackLayout>
+                            <Label x:Name="Description" Text="{Binding description}"/>
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <StackLayout>
+                            <Label Text="Specification" TextColor="Green"
+                               FontSize="Title"
+                               FontAttributes="Bold"/>
+                            <Label x:Name="Specification"
+                               Text="{Binding specification}"/>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </RefreshView>
+        </ScrollView>
+    </Grid>
+</ContentPage>

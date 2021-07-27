@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPosMobile.Views.AnimatedBackground">
+    <Grid>
+        <BoxView x:Name="boxBackground" Scale="5" AnchorX="0" AnchorY="1">
+            <BoxView.Background>
+                <LinearGradientBrush >
+
+                    <GradientStop Color="CadetBlue" Offset="0.3"/>
+                    <GradientStop Color="LightSeaGreen" Offset="0.4"/>
+                    <GradientStop Color="LightCyan" Offset="0.3"/>
+                    <GradientStop Color="Pink" Offset="0.5"/>
+                    <GradientStop Color="Gray" Offset="0.4"/>
+                    <GradientStop Color="LightYellow" Offset="1.0"/>
+                    
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <Frame HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HeightRequest="100"
+               WidthRequest="250"
+               BorderColor="White"
+               BackgroundColor="Transparent">
+            <Label Text="Animation"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+        </Frame>
+    </Grid>
+</ContentPage>

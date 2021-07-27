@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPosMobile.Views.Contact"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    <Grid BackgroundColor="#f2f2f2">
+        <Grid RowDefinitions="auto,*">
+            <Grid Grid.Row="0">
+                <Frame Margin="10" Padding="0">
+                    <StackLayout Margin="10,0">
+                        <Label Text="Contact Us"
+                               FontSize="25"
+                               TextColor="Black"
+                               FontAttributes="Bold"/>
+                        <Label Text="If you have any query related to our organization Please Contact us"
+                               TranslationY="-10"/>
+                        <Grid ColumnDefinitions="*,*">
+                            <Grid Grid.Column="0">
+                                <StackLayout >
+                                    <Label Text="Organization Name"
+                                           TextColor="Black"
+                                           FontSize="18"/>
+                                    <Label Text="Email"
+                                            TextColor="Black"
+                                           FontSize="18"/>
+                                    <Label Text="Contact No"
+                                            TextColor="Black"
+                                           FontSize="18"/>
+                                </StackLayout>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackLayout >
+                                    <Label Text="Surpass Technologies"
+                                           TextColor="Black"
+                                           FontSize="16"/>
+                                    <Label Text="Surpass@example.com"
+                                            TextColor="Black"
+                                           FontSize="16"/>
+                                    <Label Text="9898989898"
+                                            TextColor="Black"
+                                           FontSize="16"/>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10">
+                <maps:Map x:Name="map"
+               IsShowingUser="True"
+               MoveToLastRegionOnLayoutChange="False">
+                    <x:Arguments>
+                        <maps:MapSpan>
+                            <x:Arguments>
+                                <maps:Position>
+                                    <x:Arguments>
+                                        <x:Double>26.640748659378403</x:Double>
+                                        <x:Double>87.98228314036668</x:Double>
+                                    </x:Arguments>
+                                </maps:Position>
+                                <x:Double>0.01</x:Double>
+                                <x:Double>0.01</x:Double>
+                            </x:Arguments>
+                        </maps:MapSpan>
+                    </x:Arguments>
+                    <maps:Map.Pins>
+                        <maps:Pin Label="Surpass Technologies"
+                       Address="Birtamod"
+                       Type="Place">
+                            <maps:Pin.Position>
+                                <maps:Position>
+                                    <x:Arguments>
+                                        <x:Double>26.640748659378403</x:Double>
+                                        <x:Double>87.98228314036668</x:Double>
+                                    </x:Arguments>
+                                </maps:Position>
+                            </maps:Pin.Position>
+                        </maps:Pin>
+                    </maps:Map.Pins>
+                </maps:Map>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

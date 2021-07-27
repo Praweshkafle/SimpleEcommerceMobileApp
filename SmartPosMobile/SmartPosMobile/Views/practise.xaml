@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:SmartPosMobile.ViewModels"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" 
+             xmlns:custom="clr-namespace:SmartPosMobile.Helper"
+             xmlns:tabView="sync" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="SmartPosMobile.Views.practise"
+             x:Name="this"
+             Title="Home">
+    <ContentPage.BindingContext>
+        <local:QuizViewModel/>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,2* , *">
+        <pancake:PancakeView BackgroundColor="{StaticResource Primary}"
+                             x:Name="pancake"
+                             CornerRadius="0,0,20,20"
+                             Grid.Row="0"
+                             HeightRequest="70"
+                             >
+            <SearchBar BackgroundColor="White"
+                       Margin="20,0,20,25"/>
+        </pancake:PancakeView>
+        <StackLayout Margin="10" Grid.Row="1" HeightRequest="350">
+            <FlexLayout>
+                <Label HorizontalOptions="Start" Text="{Binding Points, StringFormat='Total Points :{0:F2}'}"/>
+                <Label HorizontalOptions="End" FontSize="Large" Text="{Binding Position, Mode=TwoWay}"/>
+            </FlexLayout>
+            <StackLayout>
+                <Label Text=""
+                       x:Name="time"
+                       HorizontalOptions="EndAndExpand"
+                       FontSize="25"/>
+            </StackLayout>
+            <CarouselView x:Name="carouelAuto"
+                          ItemsSource="{Binding Quizzes}"
+                          Position="{Binding Position}"
+                          IsSwipeEnabled="{Binding Swipe}"
+                          IsVisible="true">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0" Spacing="10" RadioButtonGroup.GroupName="QuizQuestion"
+                                     RadioButtonGroup.SelectedValue="{Binding Selected, Source={RelativeSource AncestorType={x:Type local:QuizViewModel}}}">
+                            <Label FontSize="Title" Text="{Binding Question}" />
+                            <RadioButton Value="{Binding option_1}" Content="{Binding option_1}" ClassId="{Binding Id}"/>
+                            <RadioButton Value="{Binding option_2}"  Content="{Binding option_2}"  ClassId="{Binding Id}"/>
+                            <Button Text="Submit" x:Name="btn" BackgroundColor="Gray"
+                                    Command="{Binding Submit, Source={RelativeSource AncestorType={x:Type local:QuizViewModel}}}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                            <Label Text="{Binding Selected, Source={RelativeSource AncestorType={x:Type local:QuizViewModel}}}" FontSize="Title" TextColor="Black"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <StackLayout IsVisible="{Binding }"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Label Text="{Binding TotalPoint, StringFormat='Total Point Scored {0}'}"
+                       IsVisible="{Binding Visible}"/>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="2">
+            <Label Text="Name" FontSize="Large"/>
+            <custom:CustomEntry BackgroundColor="#f2f2f2"
+                                Margin="10"
+                                />
+            
+        </StackLayout>
+
+      
+    </Grid>
+</ContentPage>

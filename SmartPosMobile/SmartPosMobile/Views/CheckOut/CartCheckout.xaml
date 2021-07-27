@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:SmartPosMobile.ViewModels.Checkout"
+             x:Class="SmartPosMobile.Views.CheckOut.CartCheckout"
+             Title="Checkout">
+    
+    <Grid RowDefinitions="auto,*">
+        <Grid Grid.Row="0" >
+            <CollectionView ItemsSource="{Binding ItemsData}"
+                                  x:Name="listview"
+                                  SelectionMode="Single"
+                                  VerticalScrollBarVisibility="Never">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Delete"  
+                                           BackgroundColor="Red"
+                                           Command="{Binding DeleteItem, Source={RelativeSource AncestorType={x:Type local:CheckoutViewModel}}}"
+                                           CommandParameter="{Binding .}" >
+                                </SwipeItem>
+                            </SwipeView.RightItems>
+                            <SwipeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DeleteItem, Source={RelativeSource AncestorType={x:Type local:CheckoutViewModel}}}"
+                                           CommandParameter="{Binding .}"/>
+                            </SwipeView.GestureRecognizers>
+                            <Grid>
+                                <Frame BorderColor="LightGray" x:Name="frameX">
+                                    <Grid ColumnDefinitions="auto,*" HeightRequest="130">
+                                        <Grid Grid.Column="0"  WidthRequest="170">
+                                            <StackLayout>
+                                                <Image x:Name="image" Source="{Binding Image}"
+                                                                   HeightRequest="150"
+                                                                   WidthRequest="150"
+                                                                   HorizontalOptions="StartAndExpand"
+                                                                   Margin="0"/>
+                                            </StackLayout>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <StackLayout >
+                                                <StackLayout>
+                                                    <Label Text="hello everyone" TextColor="Black" FontSize="12"/>
+                                                    <Label Text="{Binding Title}" TextColor="Black" FontSize="12"/>
+                                                    <Label Text="{Binding Category}" TextColor="Green" FontSize="10"/>
+                                                    <Label Text="{Binding Price}" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Frame Padding="10,5"
+                                                               WidthRequest="60"
+                                                               HeightRequest="20"
+                                                               BackgroundColor="#f2f2f2">
+                                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                                <Label HorizontalOptions="StartAndExpand" Text="+" TextColor="Black" BackgroundColor="#f2f2f2">
+                                                                    <Label.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding AddItem, Source={RelativeSource AncestorType={x:Type local:CheckoutViewModel}}}" CommandParameter="{Binding .}"/>
+                                                                    </Label.GestureRecognizers>
+                                                                </Label>
+                                                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding Quantity, StringFormat='{0:F0}'}" TextColor="Black" BackgroundColor="#f2f2f2"/>
+                                                                <Label HorizontalOptions="EndAndExpand" 
+                                                                       Text="-" FontSize="20" 
+                                                                       TextColor="Black"
+                                                                       TranslationY="-4"
+                                                                       BackgroundColor="#f2f2f2">
+                                                                    <Label.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding RemoveItem, Source={RelativeSource AncestorType={x:Type local:CheckoutViewModel}}}" CommandParameter="{Binding .}"/>
+                                                                    </Label.GestureRecognizers>
+                                                                </Label>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                  <CollectionView.EmptyView>
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Source="empty.png"
+                                       Grid.Row="1"/>
+                        <Label Text="No Items Available"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Row="2"/>
+                    </Grid>
+                  </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+        <Grid Grid.Row="1" BackgroundColor="Yellow" VerticalOptions="EndAndExpand">
+            <StackLayout>
+                <Frame HorizontalOptions="StartAndExpand"
+                       BackgroundColor="Green">
+                    <StackLayout>
+                        <Label Text="Proceed" FontSize="25"
+                               TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </Grid>
+    <!--<AbsoluteLayout BackgroundColor="#f2f2f2">
+        <StackLayout  AbsoluteLayout.LayoutBounds="0.5,0.03,90,90"
+                   AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional">
+            <Image Source="icon.png"
+                  />
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding itemCollection, Source={RelativeSource AncestorType={x:Type local:CheckoutViewModel}}}"
+                        AbsoluteLayout.LayoutBounds="0.40,0.21,380,200"
+            AbsoluteLayout.LayoutFlags="XProportional,YProportional"
+                        >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout BackgroundColor="Yellow">
+                            <Label Text="hello"/>
+                            <Label Text="hello"/>
+                            <Label Text="hello"/>
+                            <Label Text="hello"/>
+                            <Label Text="{Binding title}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        --><!--<StackLayout
+            AbsoluteLayout.LayoutBounds="0.40,0.21,380,200"
+            AbsoluteLayout.LayoutFlags="XProportional,YProportional"
+            HorizontalOptions="FillAndExpand">
+
+           
+            
+            --><!--<Frame HeightRequest="20" HasShadow="False">
+                <StackLayout Orientation="Horizontal" TranslationY="-8">
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <Label Text="Pasta" TextColor="Gray" FontSize="Large"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label Text="200$" TextColor="Black" FontSize="Large"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame HeightRequest="20" HasShadow="False">
+                <StackLayout Orientation="Horizontal" TranslationY="-10">
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <Label Text="Noodles" TextColor="Gray" FontSize="Large"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label Text="200$" TextColor="Black" FontSize="Large"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame HeightRequest="20" HasShadow="False">
+                <StackLayout Orientation="Horizontal" TranslationY="-10">
+                    <StackLayout HorizontalOptions="StartAndExpand">
+                        <Label Text="Burger" TextColor="Gray" FontSize="Large"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        <Label Text="200$" TextColor="Black" FontSize="Large"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>--><!--
+            <Frame HeightRequest="20" HasShadow="False">
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label Text="Total Amount : 600$" TextColor="Black" FontSize="Large"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>-->
+        <!--<xct:TabView AbsoluteLayout.LayoutBounds="0.4,0.8,380,200"
+                     AbsoluteLayout.LayoutFlags="XProportional,YProportional"
+                     BackgroundColor="white">
+            <xct:TabViewItem Text="Khalti" x:Name="Khalti" TextColorSelected="Black"
+                             FontAttributes="Bold">
+                <xct:TabViewItem.Content>
+                    <StackLayout>
+                        <inputLayout:SfTextInputLayout
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Khalti Name" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text=""/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout
+                            TranslationY="-20"
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Phone No" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text=""/>
+                        </inputLayout:SfTextInputLayout>
+                    </StackLayout>
+                </xct:TabViewItem.Content>
+            </xct:TabViewItem>
+            <xct:TabViewItem Text="Esewa" x:Name="esewa" TextColorSelected="Black"
+                             FontAttributes="Bold">
+                <xct:TabViewItem.Content>
+                    <StackLayout>
+                        <inputLayout:SfTextInputLayout
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Esewa Name" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text=""/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout
+                            TranslationY="-20"
+                            HeightRequest="5"
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Phone No" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text="" />
+                        </inputLayout:SfTextInputLayout>
+                    </StackLayout>
+                </xct:TabViewItem.Content>
+            </xct:TabViewItem>
+            <xct:TabViewItem Text="Fone Pay" x:Name="fone" 
+                             TextColorSelected="Black"
+                             FontAttributes="Bold">
+                <xct:TabViewItem.Content>
+                    <StackLayout>
+                        <inputLayout:SfTextInputLayout
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Fone Pay Name" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text=""/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout
+                            TranslationY="-20"
+                            UnfocusedColor="SkyBlue"
+                            FocusedColor="Green"
+                            Hint="Phone No" 
+                            Margin="15,0,15,0"
+                             ContainerType="Outlined">
+                            <Entry Text="" />
+                        </inputLayout:SfTextInputLayout>
+                    </StackLayout>
+                </xct:TabViewItem.Content>
+            </xct:TabViewItem>
+        </xct:TabView>--><!--
+        <Button AbsoluteLayout.LayoutBounds="0,1,1,70"
+                AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional"
+                Text="Proceed"
+                FontAttributes="Bold"
+                FontSize="Large"
+                BackgroundColor="Green"
+                HorizontalOptions="FillAndExpand"
+                Clicked="Button_Clicked"/>
+        --><!--<ContentView x:Name="overlay"
+               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+               AbsoluteLayout.LayoutFlags="All"
+               IsVisible="False"
+               BackgroundColor="#C0808080"
+               Padding="10, 0">
+            -->
+        <!-- Overlay -->
+        <!--
+            <StackLayout Orientation="Vertical"
+             BackgroundColor="White"
+             HeightRequest="175"
+             WidthRequest="300"
+             HorizontalOptions="Center"
+             VerticalOptions="Start"
+             Margin="0,20,0,0" >
+
+                <Label BackgroundColor="Black"
+         FontSize="18"
+         TextColor="White"
+         HorizontalOptions="Fill"
+         Text="Add a Player" />
+
+                <Entry x:Name="EnteredName"
+         Placeholder="Player Name"
+         TextColor="Black"
+         VerticalOptions="CenterAndExpand"
+         HorizontalOptions="Center"
+         WidthRequest="250" />
+
+                <StackLayout Orientation="Horizontal"
+               HorizontalOptions="Center">
+
+                    <Button Text="Cancel" FontSize="Large"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnCancelButtonClicked"/>
+
+                    <Button Text="OK" FontSize="Large"
+                  VerticalOptions="CenterAndExpand"
+                  HorizontalOptions="Center"
+                  Clicked="OnOKButtonClicked" />
+                </StackLayout>
+
+            </StackLayout>
+        </ContentView>--><!--
+    </AbsoluteLayout>-->
+</ContentPage>

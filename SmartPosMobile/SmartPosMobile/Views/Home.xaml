@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPosMobile.Views.Home"
+             xmlns:models="clr-namespace:SmartPosMobile.ViewModels.HomeViewModel"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:local="clr-namespace:SmartPosMobile.ViewModels" xmlns:behaviorsPack1="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack" 
+             xmlns:views="clr-namespace:SmartPosMobile.Views"
+             x:Name="this">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Image Source="empty.png"></Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.BindingContext>
+        <local:ItemsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.TitleView>
+        <StackLayout Spacing="10">
+            <Frame Padding="0" Margin="0,10,0,0" BackgroundColor="White" HasShadow="False" BorderColor="Black" CornerRadius="15" HeightRequest="30">
+                <SearchBar BackgroundColor="Transparent" Margin="0"/>
+            </Frame>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Order="Primary"
+            Text="{Binding ItemCount, StringFormat='Item:{0:F0}'}"
+            />
+        <ToolbarItem
+                 IconImageSource="cart.png"
+                 Order="Primary"
+                 Command="{Binding Cart_click}"
+                 Priority="0">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <AbsoluteLayout>
+        <ScrollView  x:Name="scrollView"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     HeightRequest="50"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Scrolled="scrollView_Scrolled"
+                     VerticalScrollBarVisibility="Never">
+            <Grid Margin="10" HeightRequest="800">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                   
+                    <StackLayout Orientation="Horizontal" x:Name="Categoriestitle">
+                        <Label Text="Categories" TextColor="#006600" FontSize="20" Margin="2" FontAttributes="Bold"/>
+                        <Button Text="See more" BackgroundColor="White" TextColor="#006600" 
+                        HorizontalOptions="EndAndExpand"
+                        Padding="0"
+                        Margin="0"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" HeightRequest="60" TranslationY="-12" x:Name="collection">
+                    <CollectionView>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Camera</x:String>
+                                <x:String>Bag</x:String>
+                                <x:String>Bycycle</x:String>
+                                <x:String>Bycycle</x:String>
+                            </x:Array>
+                        </CollectionView.ItemsSource>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Frame Margin="7"
+                                   BackgroundColor="LightGray"
+                                   CornerRadius="5"
+                                   Padding="2"
+                                   >
+                                        <Button Text="{Binding .}"
+                                        Padding="0"
+                                        Margin="0"
+                                        HeightRequest="7"
+                                        BackgroundColor="LightGray"
+                                        BorderColor="White"
+                                        FontSize="15"
+                                        TextColor="Black"/>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                <Grid Grid.Row="2" TranslationY="-15">
+                    <StackLayout>
+                        <Label Text="Filters" TextColor="#006600" FontSize="20" Margin="2" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="3" TranslationY="-15">
+                    <CollectionView ItemsSource="{Binding items}"
+                                  x:Name="listview"
+                                  IsEnabled="{Binding IsEnable, Mode=TwoWay}"
+                                  SelectionMode="Single"
+                                  VerticalScrollBarVisibility="Never">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Frame BorderColor="#f2f2f2">
+                                        <Grid ColumnDefinitions="auto,*" HeightRequest="130">
+                                            <Grid Grid.Column="0"  WidthRequest="170">
+                                                <StackLayout>
+                                                    <Image x:Name="image" Source="{Binding Image}"
+                                                                   HeightRequest="150"
+                                                                   WidthRequest="150"
+                                                                   HorizontalOptions="StartAndExpand"
+                                                                   Margin="0">
+                                                    </Image>
+                                                </StackLayout>
+                                            </Grid>
+                                            <Grid Grid.Column="1" >
+                                                <StackLayout>
+                                                    <StackLayout>
+                                                        <Label Text="hello everyone" TextColor="Black" FontSize="12"/>
+                                                        <Label Text="{Binding Title}" TextColor="Black" FontSize="12"/>
+                                                        <Label Text="{Binding Category}" TextColor="Green" FontSize="10"/>
+                                                        <Label Text="{Binding Price}" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                                                        <StackLayout HeightRequest="25" Orientation="Horizontal">
+                                                            <Label BackgroundColor="#f2f2f2"
+                                                                       HeightRequest="3"
+                                                                       WidthRequest="70"
+                                                                       Text="Add To Cart"
+                                                                       FontSize="12"
+                                                                       Padding="3"
+                                                                       Margin="0">
+                                                                <Label.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding AddToCart, Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}}"
+                                                                                              CommandParameter="{Binding .}"/>
+                                                                </Label.GestureRecognizers>
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+
+                                                </StackLayout>
+
+                                            </Grid>
+                                        </Grid>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TapCommand, Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Image Source="empty.png"
+                                       Grid.Row="0"/>
+                                <Label Text="No Items Available"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Row="1"/>
+                            </Grid>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </AbsoluteLayout>
+</ContentPage>

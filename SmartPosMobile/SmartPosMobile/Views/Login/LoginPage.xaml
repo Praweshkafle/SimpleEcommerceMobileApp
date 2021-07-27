@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:icon="clr-namespace:SmartPosMobile.Helper"
+             x:Class="SmartPosMobile.Views.Login.LoginPage">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#3399ff">
+                <!--<Path Fill="skyblue"
+                      HorizontalOptions="EndAndExpand">
+                    <Path.Data>
+                        <EllipseGeometry Center="70,0"
+                     RadiusX="70"
+                     RadiusY="70" />
+                    </Path.Data>
+                </Path>-->
+                <StackLayout VerticalOptions="Center">
+                    <!--<Label Text="SIGN IN" FontSize="50" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                    <Frame CornerRadius="100" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0">
+                        <Image Source="dress1.jfif" Aspect="AspectFill"/>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" >
+                <!--<Path Fill="skyblue"
+                      HorizontalOptions="Start">
+                    <Path.Data>
+                        <EllipseGeometry Center="2,300"
+                     RadiusX="300"
+                     RadiusY="300" />
+                    </Path.Data>
+                </Path>-->
+                <StackLayout>
+                    <StackLayout Margin="15">
+                        <Label Text="User Name" FontSize="20" TextColor="#3399ff" FontAttributes="Bold"/>
+                      
+                            <Entry Text="{Binding userName}"/>
+                        <Label Text="Password" FontSize="20" TextColor="#3399ff" FontAttributes="Bold"/>
+                      
+                            <Entry Text="{Binding password}" IsPassword="True"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Button Text="Login" Margin="20"
+                            TranslationY="-30"
+                            CornerRadius="30"
+                            BackgroundColor="#3399ff"
+                            FontSize="20"
+                            Command="{Binding postData}"
+                                />
+                        <Label Text="Forgot Password" TextColor="Chocolate" FontSize="20" HorizontalTextAlignment="Center" 
+                               TranslationY="-40"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="2">
+                <StackLayout>
+                    <Label FontFamily="Material" TextColor="Chocolate" Text="&#xe935;"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
